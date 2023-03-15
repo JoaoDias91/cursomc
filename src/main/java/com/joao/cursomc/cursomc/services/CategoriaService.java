@@ -2,6 +2,7 @@ package com.joao.cursomc.cursomc.services;
 
 import com.joao.cursomc.cursomc.domain.Categoria;
 import com.joao.cursomc.cursomc.repositories.CategoriaRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,6 @@ public class CategoriaService {
 
     public Categoria buscar(Integer id){
         Optional<Categoria> obj = repository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(()-> new ObjectNotFoundException(id, Categoria.class.getName()));
     }
 }
