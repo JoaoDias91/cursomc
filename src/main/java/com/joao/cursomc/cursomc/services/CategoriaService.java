@@ -2,8 +2,10 @@ package com.joao.cursomc.cursomc.services;
 
 import com.joao.cursomc.cursomc.domain.Categoria;
 import com.joao.cursomc.cursomc.repositories.CategoriaRepository;
-import org.hibernate.ObjectNotFoundException;
+import com.joao.cursomc.cursomc.services.exceptions.DataIntegrityException;
+import com.joao.cursomc.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +18,9 @@ public class CategoriaService {
 
     public Categoria find(Integer id){
         Optional<Categoria> obj = repository.findById(id);
-        return obj.orElseThrow(()-> new ObjectNotFoundException(id, Categoria.class.getName()));
+        return obj.orElseThrow(()-> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+
     }
 
     public Categoria insert(Categoria obj) {
@@ -27,5 +31,15 @@ public class CategoriaService {
     public Categoria update(Categoria obj) {
         find(obj.getId());
         return repository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        find(id);
+        try {
+            repository.deleteById(id);
+        }catch (DataIntegrityViolationException exception){
+            throw new DataIntegrityException("Não é possível deletar uma categoria com produtos relacionados");
+        }
+
     }
 }
