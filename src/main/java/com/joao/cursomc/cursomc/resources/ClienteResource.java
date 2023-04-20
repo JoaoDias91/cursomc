@@ -1,8 +1,11 @@
 package com.joao.cursomc.cursomc.resources;
 
+import com.joao.cursomc.cursomc.domain.Categoria;
 import com.joao.cursomc.cursomc.domain.Cliente;
 import com.joao.cursomc.cursomc.domain.Cliente;
+import com.joao.cursomc.cursomc.dto.CategoriaDTO;
 import com.joao.cursomc.cursomc.dto.ClienteDTO;
+import com.joao.cursomc.cursomc.dto.ClienteNewDTO;
 import com.joao.cursomc.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +29,15 @@ public class ClienteResource {
     public ResponseEntity<Cliente> find(@PathVariable Integer id){
         Cliente obj = service.find(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){
+        Cliente obj = service.fromDTO(objDto);
+        obj = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
     
     @RequestMapping(method = RequestMethod.GET)
