@@ -1,12 +1,27 @@
 package com.joao.cursomc.cursomc.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class ClienteNewDTO implements Serializable {
 
+    @NotEmpty(message = "O Campo não pode ser vazio!")
+    @Length(min = 5, max = 120, message =  "O campo deve conter entre 5 e 120 caractéres")
     private String nome;
+
+    @NotEmpty(message = "O Campo não pode ser vazio!")
+    @Email(message = "Email inválido!")
     private String email;
+
+    @NotEmpty(message = "O campo cpf/cnpj não pode ser vazio!")
     private String cpfOuCnpj;
+
+    @NotNull(message = "Informar Tipo 1 para Pessoa Física ou Tipo 2 para Jurídica")
     private Integer tipo;
     private String logradouro;
     private String numero;
@@ -14,6 +29,8 @@ public class ClienteNewDTO implements Serializable {
     private String bairro;
     private String cep;
     private Integer cidadeId;
+
+    @NotEmpty(message = "Necessário informar 1 telefone!")
     private String telefone1;
     private String telefone2;
     private String telefone3;
