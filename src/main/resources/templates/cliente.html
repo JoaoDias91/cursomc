@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>Thymeleaf Form handling Demo</title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body class="container">
+<h1 class="py-5">Cadastrar Cliente</h1>
+<form method="post" th:action="@{/clientes/}" th:object="${clienteNewDTO}">
+  <div class="form-group">
+    <input class="form-control" id="nome" placeholder="Nome" required
+           th:field="*{nome}"
+           type="text"/>
+    <input class="form-control" id="email" placeholder="email" required
+           th:field="*{email}"
+           type="text"/>
+    <input class="form-control" id="documento" placeholder="cpf ou cnpj" required
+           th:field="*{cpfOuCnpj}"
+           type="text"/>
+    <input class="form-control" id="logradouro" placeholder="logradouro" required
+           th:field="*{logradouro}"
+           type="text"/>
+    <input class="form-control" id="numero" placeholder="numero" required
+           th:field="*{numero}"
+           type="text"/>
+    <input class="form-control" id="complemento" placeholder="complemento" required
+           th:field="*{complemento}"
+           type="text"/>
+    <input class="form-control" id="bairro" placeholder="bairro" required
+           th:field="*{bairro}"
+           type="text"/>
+    <input class="form-control" id="cep" placeholder="cep" required
+           th:field="*{cep}"
+           type="text"/>
+    <input class="form-control" id="telefone1" placeholder="telefone" required
+           th:field="*{email}"
+           type="text"/>
+    <input class="form-control" id="telefone2" placeholder="telefone" required
+           th:field="*{email}"
+           type="text"/>
+    <input class="form-control" id="telefone3" placeholder="telefone" required
+           th:field="*{email}"
+           type="text"/>
+  </div>
+</form>
+</body>
+</html>

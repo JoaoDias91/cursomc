@@ -1,6 +1,5 @@
 package com.joao.cursomc.cursomc.services;
 
-import com.joao.cursomc.cursomc.domain.Categoria;
 import com.joao.cursomc.cursomc.domain.Cidade;
 import com.joao.cursomc.cursomc.domain.Cliente;
 import com.joao.cursomc.cursomc.domain.Endereco;
