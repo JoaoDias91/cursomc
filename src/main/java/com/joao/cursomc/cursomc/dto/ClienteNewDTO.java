@@ -156,4 +156,7 @@ public class ClienteNewDTO implements Serializable {
     public void setTelefone3(String telefone3) {
         this.telefone3 = telefone3;
     }
+
+    public ClienteNewDTO() {
+    }
 }
